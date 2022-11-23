@@ -3,11 +3,13 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        mytheme: {
+        marttheme: {
+
+          primary: "#149777",
 
           neutral: "#212121",
 
-          dark: "#121212",
+          black: "#121212",
 
           warning: "#FFC800",
 
