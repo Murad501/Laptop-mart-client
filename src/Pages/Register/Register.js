@@ -20,13 +20,12 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  //email & password registration user
   const handleRegister = (data) => {
     const user = {
       name: data.name,
       email: data.email,
     };
-    console.log(user);
     createUser(data.email, data.password)
       .then((result) => {
         const currentUser = result.user;
@@ -34,24 +33,83 @@ const Register = () => {
           displayName: data.name,
         })
           .then(() => {
-            setFirebaseError("");
-            navigate(from, { replace: true });
-            toast.success("user register successfully");
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(user),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.acknowledged) {
+                  setFirebaseError("");
+                  navigate(from, { replace: true });
+                  toast.success("user register successfully");
+                }
+              });
           })
           .catch((err) => setFirebaseError(err.message));
       })
       .catch((err) => setFirebaseError(err.message));
   };
-
+  //seller registration
   const handleSellerRegister = (data) => {
-    console.log(data);
+    const user = {
+      name: data.name,
+      email: data.email,
+    };
+    createUser(data.email, data.password)
+      .then((result) => {
+        const currentUser = result.user;
+        updateProfile(currentUser, {
+          displayName: data.name,
+        })
+          .then(() => {
+            fetch("http://localhost:5000/sellers", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(user),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.acknowledged) {
+                  console.log(data)
+                  setFirebaseError("");
+                  navigate(from, { replace: true });
+                  toast.success("seller register successfully");
+                }
+              });
+          })
+          .catch((err) => setFirebaseError(err.message));
+      })
+      .catch((err) => setFirebaseError(err.message));
   };
-
+  // google login
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        navigate(from, { replace: true });
-        toast.success("user login successfully");
+        const user = {
+          name: result.user.displayName,
+          email: result.user.email,
+        };
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.acknowledged) {
+              setFirebaseError("");
+              navigate(from, { replace: true });
+              toast.success("user register successfully");
+            }
+          });
       })
       .catch((err) => setFirebaseError(err.message));
   };

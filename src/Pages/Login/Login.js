@@ -25,9 +25,26 @@ const Login = () => {
 
     const handleGoogleLogin = () => {
         googleLogin()
-        .then(() => {
-            navigate(from, { replace: true });
-            toast.success('user login successfully')
+        .then((result) => {
+          const user = {
+            name: result.user.displayName,
+            email: result.user.email,
+          };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                setFirebaseError("");
+                navigate(from, { replace: true });
+                toast.success("user register successfully");
+              }
+            });
         })
         .catch(err => setFirebaseError(err.message))
     }
