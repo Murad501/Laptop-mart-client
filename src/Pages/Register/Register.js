@@ -58,6 +58,8 @@ const Register = () => {
     const user = {
       name: data.name,
       email: data.email,
+      role: 'seller',
+      verified: false
     };
     createUser(data.email, data.password)
       .then((result) => {
