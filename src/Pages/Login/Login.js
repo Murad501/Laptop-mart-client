@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/UserContext";
 
 const Login = () => {
@@ -9,15 +10,25 @@ const Login = () => {
     const {loginUser, googleLogin} = useContext(authContext)
     const [firebaseError, setFirebaseError] = useState('')
 
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || "/";
+
     const handleLogin = data => {
         loginUser(data.email, data.password)
-        .then(result => {console.log(result.user)})
+        .then(result => {
+            toast.success('user login successfully')
+            navigate(from, { replace: true });
+        })
         .catch(err => setFirebaseError(err.message))
     }
 
     const handleGoogleLogin = () => {
         googleLogin()
-        .then(result => console.log(result.user))
+        .then(() => {
+            navigate(from, { replace: true });
+            toast.success('user login successfully')
+        })
         .catch(err => setFirebaseError(err.message))
     }
   return (
