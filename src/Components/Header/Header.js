@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaLaptop } from "react-icons/fa";
+import { authContext } from "../../Context/UserContext";
 
 const Header = () => {
+  const {user, Logout} = useContext(authContext)
+
+
+  const handleLogOut = () => {
+    Logout()
+    .then(()=>{})
+    .catch(()=>{})
+  }
+
   const menu = [
     <div className="flex items-center gap">
       <li className="text-primary font-semibold">
         <Link to="/dashboard">Dashboard</Link>
       </li>
-      <li className="text-primary font-semibold">
-        <Link to="/dashboard">Logout</Link>
+      {
+        user? <button onClick={handleLogOut} className="text-primary font-semibold">Logout</button> : <li className="text-primary font-semibold">
+        <Link to="/login">Login</Link>
       </li>
+      }
     </div>,
   ];
 
