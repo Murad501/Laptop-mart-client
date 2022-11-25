@@ -8,35 +8,29 @@ const DashboardLayout = () => {
     <div>
       <Header></Header>
       <div className="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
+        <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
           <Outlet></Outlet>
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
-          >
-            Open drawer
-          </label>
         </div>
         <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            <li>
+          <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+          <ul className="menu p-4 w-80 font-semibold bg-base-100">
+            <li className="hover:text-primary">
               <Link>My Orders</Link>
             </li>
-            <li>
+            <li className="hover:text-primary">
               <Link>Add Product</Link>
             </li>
-            <li>
+            <li className="hover:text-primary">
               <Link>My Product</Link>
             </li>
-            <li>
+            <li className="hover:text-primary">
               <Link>All Sellers</Link>
             </li>
-            <li>
+            <li className="hover:text-primary">
               <Link>All Buyers</Link>
             </li>
-            <li>
+            <li className="hover:text-primary">
               <Link>Reported Items</Link>
             </li>
           </ul>

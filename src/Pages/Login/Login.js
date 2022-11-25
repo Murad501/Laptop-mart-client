@@ -4,21 +4,30 @@ import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/UserContext";
+import { useToken } from "../../Shared/getToken";
+import { saveUser } from "../../Shared/saveUser";
 
 const Login = () => {
     const {register, handleSubmit, formState: {errors}} = useForm()
     const {loginUser, googleLogin} = useContext(authContext)
     const [firebaseError, setFirebaseError] = useState('')
+    const [userEmail, setUserEmail] = useState('')
+    const [token] = useToken(userEmail)
 
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || "/";
 
+    if(token){
+      navigate(from, { replace: true });
+    }
+
     const handleLogin = data => {
         loginUser(data.email, data.password)
         .then(result => {
-            toast.success('user login successfully')
+            toast.success('first one')
             navigate(from, { replace: true });
+            toast.success('user login successfully')
         })
         .catch(err => setFirebaseError(err.message))
     }
@@ -26,25 +35,15 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleLogin()
         .then((result) => {
+          const name = result.user.displayName 
+          const email = result.user.email
           const user = {
-            name: result.user.displayName,
-            email: result.user.email,
-          };
-          fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(user),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.acknowledged) {
-                setFirebaseError("");
-                navigate(from, { replace: true });
-                toast.success("user register successfully");
-              }
-            });
+            name,
+            email
+          }
+          saveUser(user)
+          setUserEmail(email)
+          toast.success('user login successfully')
         })
         .catch(err => setFirebaseError(err.message))
     }

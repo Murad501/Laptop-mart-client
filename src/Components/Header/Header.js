@@ -9,7 +9,9 @@ const Header = () => {
 
   const handleLogOut = () => {
     Logout()
-    .then(()=>{})
+    .then(()=>{
+      localStorage.removeItem('access-token')
+    })
     .catch(()=>{})
   }
 
@@ -65,7 +67,7 @@ const Header = () => {
           {menu}
         </ul>
       </div>
-      <label tabIndex={0} className="btn btn-ghost lg:hidden">
+      <label htmlFor="dashboard-drawer" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 text-primary"

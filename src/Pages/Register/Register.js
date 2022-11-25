@@ -5,15 +5,23 @@ import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../Context/UserContext";
+import { useToken } from "../../Shared/getToken";
+import { saveUser } from "../../Shared/saveUser";
 
 const Register = () => {
   const [sellerRegister, setSellerRegister] = useState(false);
   const { createUser, googleLogin } = useContext(authContext);
   const [firebaseError, setFirebaseError] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
 
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const {
     register,
@@ -22,10 +30,6 @@ const Register = () => {
   } = useForm();
   //email & password registration user
   const handleRegister = (data) => {
-    const user = {
-      name: data.name,
-      email: data.email,
-    };
     createUser(data.email, data.password)
       .then((result) => {
         const currentUser = result.user;
@@ -33,21 +37,15 @@ const Register = () => {
           displayName: data.name,
         })
           .then(() => {
-            fetch("http://localhost:5000/users", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(user),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.acknowledged) {
-                  setFirebaseError("");
-                  navigate(from, { replace: true });
-                  toast.success("user register successfully");
-                }
-              });
+            const name = result.user.displayName;
+            const email = result.user.email;
+            const user = {
+              name,
+              email,
+            };
+            saveUser(user);
+            setUserEmail(email);
+            toast.success('user register successfully')
           })
           .catch((err) => setFirebaseError(err.message));
       })
@@ -58,8 +56,8 @@ const Register = () => {
     const user = {
       name: data.name,
       email: data.email,
-      role: 'seller',
-      verified: false
+      role: "seller",
+      verified: false,
     };
     createUser(data.email, data.password)
       .then((result) => {
@@ -68,22 +66,9 @@ const Register = () => {
           displayName: data.name,
         })
           .then(() => {
-            fetch("http://localhost:5000/sellers", {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-              },
-              body: JSON.stringify(user),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.acknowledged) {
-                  console.log(data)
-                  setFirebaseError("");
-                  navigate(from, { replace: true });
-                  toast.success("seller register successfully");
-                }
-              });
+            saveUser(user);
+            setUserEmail(data.email);
+            toast.success('seller register successfully')
           })
           .catch((err) => setFirebaseError(err.message));
       })
@@ -97,21 +82,9 @@ const Register = () => {
           name: result.user.displayName,
           email: result.user.email,
         };
-        fetch("http://localhost:5000/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(user),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.acknowledged) {
-              setFirebaseError("");
-              navigate(from, { replace: true });
-              toast.success("user register successfully");
-            }
-          });
+        saveUser(user);
+        setUserEmail(result.user.email);
+        toast.success('user register successfully')
       })
       .catch((err) => setFirebaseError(err.message));
   };
