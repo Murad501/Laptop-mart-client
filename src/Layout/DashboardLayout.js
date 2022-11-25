@@ -19,7 +19,7 @@ const DashboardLayout = () => {
               <Link>My Orders</Link>
             </li>
             <li className="hover:text-primary">
-              <Link>Add Product</Link>
+              <Link to='/dashboard/addproduct'>Add Product</Link>
             </li>
             <li className="hover:text-primary">
               <Link>My Product</Link>
