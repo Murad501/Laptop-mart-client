@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { authContext } from "../../../Context/UserContext";
 import { format } from 'date-fns'
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const imgbbApi = process.env.REACT_APP_imgbb_api;
@@ -38,6 +39,8 @@ const AddProduct = () => {
             buyingPrice: data.buyingPrice,
             sellerName: user.displayName,
             email: user.email,
+            available: true,
+            advertised: false,
             postDate
           };
           
@@ -49,7 +52,11 @@ const AddProduct = () => {
             body:JSON.stringify(product)
           })
           .then(res => res.json())
-          .then(data => console.log(data))
+          .then(data => {
+            if(data.acknowledged){
+              toast.success('product added successfully')
+            }
+          })
         }
       });
   };

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer p-10 border-t">
+      <footer className="footer mt-10 p-10 border-t">
         <div>
           <span className="footer-title">Services</span>
           <Link to="/" className="link link-hover">

@@ -2,6 +2,7 @@
 import DashboardLayout from "../Layout/DashboardLayout";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard/Dashboard";
+import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/addproduct',
                 element: <AddProduct></AddProduct>
+            },
+            {
+                path: '/dashboard/myproducts',
+                element: <MyProducts></MyProducts>
             }
         ]
     }
