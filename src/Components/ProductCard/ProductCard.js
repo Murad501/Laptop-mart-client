@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaCheckCircle } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
+
+  const [sellerVerified, setSellerVerified] = useState(false)
+
   const {
     name,
     image,
@@ -10,8 +14,19 @@ const ProductCard = ({ product }) => {
     location,
     year,
     sellerName,
+    email,
     description
   } = product;
+
+  useEffect(()=>{
+    fetch(`http://localhost:5000/sellerVerify?email=${email}`)
+    .then(res => res.json())
+    .then(data => {
+      setSellerVerified(data.verified)
+    })
+  },[email])
+
+
   return (
     <div className="card card-compact border rounded-sm hover:shadow-lg">
       <figure>
@@ -46,7 +61,7 @@ const ProductCard = ({ product }) => {
             <span className="font-bold text-primary"> {year} Years</span>
           </p>
         </div>
-        <p className="text-xl mt-5">Seller: <span className="font-bold text-primary">{sellerName}</span></p>
+        <p className="text-xl mt-5 flex gap-2">Seller: <span className="font-bold text-primary flex items-center gap-2">{sellerName} {sellerVerified && <FaCheckCircle></FaCheckCircle>}</span></p>
         <p className="mt-5">Description: {description.length > 350 ? description.slice(0, 350)+('...'):description}</p>
         <div className="card-actions justify-center mt-5">
           <button className="btn btn-primary text-white">Book Now</button>
