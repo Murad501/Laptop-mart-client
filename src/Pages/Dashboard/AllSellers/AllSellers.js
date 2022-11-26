@@ -22,6 +22,18 @@ const AllSellers = () => {
     })
   }
 
+  const handleVerify = id => {
+    fetch(`http://localhost:5000/seller/${id}`, {
+        method: 'PATCH'
+    })
+    .then(res => res.json())
+    .then(data => {
+            refetch()
+            toast.success('Seller verified successfully')
+        
+    })
+  }
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center my-10">All Sellers</h1>
@@ -47,7 +59,7 @@ const AllSellers = () => {
                     seller.verified ? 
                     <td className="mx-auto py-1 text-center text-primary font-bold">Verified</td>
                     :
-                    <td className="mx-auto py-1 text-center"><button className="btn btn-primary text-white border-none">Verify</button></td>
+                    <td className="mx-auto py-1 text-center"><button onClick={()=>handleVerify(seller._id)} className="btn btn-primary text-white border-none">Verify</button></td>
                 }
               </tr>
             )}
