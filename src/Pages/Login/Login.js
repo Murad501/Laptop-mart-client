@@ -24,8 +24,7 @@ const Login = () => {
 
     const handleLogin = data => {
         loginUser(data.email, data.password)
-        .then(result => {
-            toast.success('first one')
+        .then(() => {
             navigate(from, { replace: true });
             toast.success('user login successfully')
         })

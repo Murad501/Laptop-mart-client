@@ -8,7 +8,7 @@ const Category = () => {
         queryFn: ()=> fetch('http://localhost:5000/categories')
         .then(res => res.json())
     })
-    console.log(categories)
+
     return (
         <div className='my-28 px-1'>
             <h1 className='text-3xl font-bold text-center'>Category</h1>
