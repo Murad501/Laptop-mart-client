@@ -42,6 +42,7 @@ const Register = () => {
             const user = {
               name,
               email,
+              role: "buyer"
             };
             saveUser(user);
             setUserEmail(email);
@@ -81,6 +82,7 @@ const Register = () => {
         const user = {
           name: result.user.displayName,
           email: result.user.email,
+          role: "buyer"
         };
         saveUser(user);
         setUserEmail(result.user.email);

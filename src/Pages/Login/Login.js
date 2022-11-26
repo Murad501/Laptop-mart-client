@@ -38,7 +38,8 @@ const Login = () => {
           const email = result.user.email
           const user = {
             name,
-            email
+            email,
+            role: "buyer"
           }
           saveUser(user)
           setUserEmail(email)
