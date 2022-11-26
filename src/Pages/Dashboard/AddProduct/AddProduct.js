@@ -4,8 +4,10 @@ import { authContext } from "../../../Context/UserContext";
 import { format } from 'date-fns'
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
+  const navigate = useNavigate()
   const imgbbApi = process.env.REACT_APP_imgbb_api;
   const { user } = useContext(authContext);
   const {
@@ -63,6 +65,8 @@ console.log(categories)
           .then(data => {
             if(data.acknowledged){
               toast.success('product added successfully')
+              navigate('/dashboard/myproducts')
+              
             }
           })
         }

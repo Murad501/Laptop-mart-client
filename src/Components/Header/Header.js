@@ -18,6 +18,9 @@ const Header = () => {
   const menu = [
     <div className="flex items-center gap">
       <li className="text-primary font-semibold">
+        <Link to="/blog">Blog</Link>
+      </li>
+      <li className="text-primary font-semibold">
         <Link to="/dashboard">Dashboard</Link>
       </li>
       {

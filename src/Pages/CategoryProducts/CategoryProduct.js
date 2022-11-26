@@ -15,7 +15,7 @@ const CategoryProduct = () => {
     const ctg = categories.map(ct => ct.name)
     return ctg.map(c => c === product.category)
   })
-
+ 
   const [bookingProduct, setBookingProduct] = useState(null)
   return (
     <div>
