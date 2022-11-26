@@ -56,10 +56,10 @@ const Header = () => {
             {menu}
           </ul>
         </div>
-        <div className="text-2xl text-primary font-bold flex items-center gap-3">
+        <Link to='/' className="text-2xl text-primary font-bold flex items-center gap-3">
         <FaLaptop></FaLaptop>
-        <Link>Laptop Mart</Link>
-      </div>
+        <p>Laptop Mart</p>
+      </Link>
       </div>
       <div>
       <div className="hidden lg:flex">

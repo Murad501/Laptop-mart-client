@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { authContext } from "../../../Context/UserContext";
 import { format } from 'date-fns'
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
 
 const AddProduct = () => {
   const imgbbApi = process.env.REACT_APP_imgbb_api;
@@ -12,6 +13,13 @@ const AddProduct = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const {data:categories = []} = useQuery({
+    queryKey: ['categories'], 
+    queryFn: ()=> fetch('http://localhost:5000/categories')
+    .then(res => res.json())
+})
+console.log(categories)
 
   const handleAddProduct = (data) => {
     const addDate = new Date();
@@ -43,7 +51,7 @@ const AddProduct = () => {
             advertised: false,
             postDate
           };
-          
+
           fetch('http://localhost:5000/products', {
             method: 'POST', 
             headers: {
@@ -152,13 +160,10 @@ const AddProduct = () => {
               placeholder="Product Category"
               {...register("category", { required: "Category is required" })}
             >
-              <option>Macbook</option>
-              <option>HP</option>
-              <option>Dell</option>
-              <option>Asus</option>
-              <option>Lenovo</option>
-              <option>Razer</option>
-              <option>Samsung</option>
+                {
+                  categories.map((category, idx) => <option key={idx}>{category.name}</option>)
+              }
+              
             </select>
             <p className="text-red-600">
               {errors.category && <span>{errors.category?.message}</span>}

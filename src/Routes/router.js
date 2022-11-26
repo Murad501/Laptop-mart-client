@@ -1,4 +1,5 @@
 
+import Page404 from "../Components/Page404";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard/Dashboard";
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     {
         path: '/', 
         element: <Main></Main>,
+        errorElement: <Page404></Page404>,
         children: [
             {
                 path: '/',
@@ -32,6 +34,7 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <DashboardLayout></DashboardLayout>,
+        errorElement: <Page404></Page404>,
         children: [
             {
                 path: '/dashboard',
