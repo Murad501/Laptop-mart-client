@@ -52,9 +52,6 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
-            <li className="hover:text-primary">
-              <Link>Reported Items</Link>
-            </li>
           </ul>
         </div>
       </div>
