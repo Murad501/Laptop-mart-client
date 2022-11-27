@@ -15,3 +15,5 @@
 * advertised product show on home page
 * admin can delete any user or seller
 
+* admin email : murad@gmail.com
+* admin pass  : 123123
