@@ -6,7 +6,7 @@ const Product = ({ product, refetch }) => {
     product;
 
   const handleAdvertised = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://backend-laptop-mart.vercel.app/product/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -19,7 +19,7 @@ const Product = ({ product, refetch }) => {
   };
   
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/product/${id}`, {
+    fetch(`https://backend-laptop-mart.vercel.app/product/${id}`, {
         method: 'DELETE'
     })
     .then(res => res.json())

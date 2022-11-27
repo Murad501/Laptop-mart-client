@@ -8,7 +8,7 @@ const Advertised = () => {
   const { data: products = [], refetch} = useQuery({
     queryKey: ["advertised"],
     queryFn: () =>
-      fetch("http://localhost:5000/advertised").then((res) => res.json()),
+      fetch("https://backend-laptop-mart.vercel.app/advertised").then((res) => res.json()),
   });
   return (
     <div>

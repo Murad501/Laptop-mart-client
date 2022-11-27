@@ -1,6 +1,6 @@
 
 export const saveUser = (user) => {
-    fetch('http://localhost:5000/users', {
+    fetch('https://backend-laptop-mart.vercel.app/users', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

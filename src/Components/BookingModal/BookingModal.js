@@ -22,7 +22,7 @@ const BookingModal = ({ bookingProduct, refetch, setBookingProduct}) => {
       location: data.location,
       number: data.number
     }
-    fetch('http://localhost:5000/bookingproduct', {
+    fetch('https://backend-laptop-mart.vercel.app/bookingproduct', {
       method: 'POST', 
       headers: {
         'content-type':'application/json'

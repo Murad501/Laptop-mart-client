@@ -8,7 +8,7 @@ const CategoryProduct = () => {
   const products = useLoaderData();
   const {data: categories = [], refetch} =useQuery({
     queryKey: ['categories'],
-    queryFn: ()=> fetch('http://localhost:5000/categories')
+    queryFn: ()=> fetch('https://backend-laptop-mart.vercel.app/categories')
     .then(res => res.json())
   })
   const product = products.find(product => {

@@ -5,7 +5,7 @@ import Product from './Product';
 const MyProducts = () => {
     const {data:products = [], refetch} = useQuery({
         queryKey: ['/products'],
-        queryFn: ()=>fetch('http://localhost:5000/products')
+        queryFn: ()=>fetch('https://backend-laptop-mart.vercel.app/products')
         .then(res => res.json())
     })
     return (

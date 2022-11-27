@@ -6,11 +6,11 @@ const AllSellers = () => {
   const { data: sellers = [], refetch } = useQuery({
     queryKey: ["sellers"],
     queryFn: () =>
-      fetch("http://localhost:5000/sellers").then((res) => res.json()),
+      fetch("https://backend-laptop-mart.vercel.app/sellers").then((res) => res.json()),
   });
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/seller/${id}`, {
+    fetch(`https://backend-laptop-mart.vercel.app/seller/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -23,7 +23,7 @@ const AllSellers = () => {
   };
 
   const handleVerify = (id) => {
-    fetch(`http://localhost:5000/seller/${id}`, {
+    fetch(`https://backend-laptop-mart.vercel.app/seller/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())

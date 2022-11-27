@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:name',
                 element: <CategoryProduct></CategoryProduct>,
-                loader: ({params})=>fetch(`http://localhost:5000/category/${params.name}`)
+                loader: ({params})=>fetch(`https://backend-laptop-mart.vercel.app/category/${params.name}`)
             },
             {
                 path: '/login',

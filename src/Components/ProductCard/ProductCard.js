@@ -19,7 +19,7 @@ const ProductCard = ({ product, setBookingProduct}) => {
   } = product;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/sellerVerify?email=${email}`)
+    fetch(`https://backend-laptop-mart.vercel.app/sellerVerify?email=${email}`)
       .then((res) => res.json())
       .then((data) => {
         setSellerVerified(data.verified);

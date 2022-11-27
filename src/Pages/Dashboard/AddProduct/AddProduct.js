@@ -18,7 +18,7 @@ const AddProduct = () => {
 
   const {data:categories = []} = useQuery({
     queryKey: ['categories'], 
-    queryFn: ()=> fetch('http://localhost:5000/categories')
+    queryFn: ()=> fetch('https://backend-laptop-mart.vercel.app/categories')
     .then(res => res.json())
 })
 console.log(categories)
@@ -54,7 +54,7 @@ console.log(categories)
             postDate
           };
 
-          fetch('http://localhost:5000/products', {
+          fetch('https://backend-laptop-mart.vercel.app/products', {
             method: 'POST', 
             headers: {
               'content-type':'application/json'
